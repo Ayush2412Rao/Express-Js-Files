@@ -34,10 +34,10 @@ const AppModel = new mongoose.model("AppModel",AppSchema);
 const AppDocument = async () => {
     try{
         const App = new AppModel({
-            firstname : "Ayush",
+            firstname : "Harsh",
             lastname  : "Rao",
-            DOB : new Date("2003/12/24"),
-            password : "ayushRao"
+            DOB : new Date("2004/12/24"),
+            password : "harshRao"
         });
         const result = await App.save();
         console.log(result);
@@ -47,5 +47,17 @@ const AppDocument = async () => {
         console.log(err);
     }
 };
-AppDocument();
+// AppDocument();
+
+const getDocument = async ()=>{
+    try{
+        const result = await AppModel.find({password : "ayushRao"}).select({name:1});
+        console.log(result);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
+getDocument();
 
