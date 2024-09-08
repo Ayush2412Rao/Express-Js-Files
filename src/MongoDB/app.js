@@ -31,7 +31,7 @@ const AppSchema = new mongoose.Schema({
 
 const AppModel = new mongoose.model("AppModel",AppSchema);
 
-const AppDocument = async () => {
+const createDocument = async () => {
     try{
         const App = new AppModel({
             firstname : "Harsh",
@@ -47,7 +47,7 @@ const AppDocument = async () => {
         console.log(err);
     }
 };
-// AppDocument();
+// createDocument();
 
 const getDocument = async ()=>{
     try{
@@ -59,5 +59,37 @@ const getDocument = async ()=>{
         console.log(err);
     }
 }
-getDocument();
+// getDocument();
+
+const updateDocument = async (_id) =>{
+    try{
+        //const objectId = new mongoose.Types.ObjectId(_id);
+        const result = await AppModel.findByIdAndUpdate({_id},{
+            $set : {lastname: "Singh"},
+            new : true,
+            useFindAndModify : false
+        });
+        console.log(result);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+};
+
+// updateDocument('66d82411bbd12bda75f153d4');
+
+const deleteDocument = async (_id) =>{
+    try{
+        const result = await AppModel.findByIdAndDelete({_id});
+        console.log(result);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+};
+
+deleteDocument("66d772e8028702a7e20da71e")
+
 
