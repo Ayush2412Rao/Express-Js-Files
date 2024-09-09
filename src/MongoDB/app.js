@@ -24,7 +24,13 @@ const AppSchema = new mongoose.Schema({
     password : {
         type : String,
         required : true,
-        select : false
+        select : false,
+        validate(value){
+            if(value.length<8)
+            {
+                throw new Error("Password must be atleast 8 characters");
+            }
+        }
     }
 
 });
@@ -34,10 +40,10 @@ const AppModel = new mongoose.model("AppModel",AppSchema);
 const createDocument = async () => {
     try{
         const App = new AppModel({
-            firstname : "Harsh",
+            firstname : "Shivansh",
             lastname  : "Rao",
             DOB : new Date("2004/12/24"),
-            password : "harshRao"
+            password : "786ty"
         });
         const result = await App.save();
         console.log(result);
@@ -47,7 +53,7 @@ const createDocument = async () => {
         console.log(err);
     }
 };
-// createDocument();
+createDocument();
 
 const getDocument = async ()=>{
     try{
@@ -90,6 +96,6 @@ const deleteDocument = async (_id) =>{
     }
 };
 
-deleteDocument("66d772e8028702a7e20da71e")
+// deleteDocument("66d772e8028702a7e20da71e")
 
 
